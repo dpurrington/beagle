@@ -6,7 +6,7 @@ import bitarray.util as bau
 import bitarray
 
 POPSIZE = 5000
-TARGET = "whatchu talking bout willis?"
+TARGET = "methinks it is like a weasel"
 TARGET_LEN = len(TARGET)
 STRING_DOMAIN = string.ascii_lowercase + string.punctuation + " "
 STRING_DOMAIN_LEN = len(STRING_DOMAIN)
