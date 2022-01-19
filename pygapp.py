@@ -14,8 +14,7 @@ desired_output = 1
 target_ords = [ord(c) for c in TARGET]
 
 def fitness_calc(solution, solution_idx):
-    #fitness is the inverse of 1 + sum of distance of each char from the target
-    #target ideal value is 1 (identity)
+    #fitness is percent of list values that are correct (right value, right place)
     retval = len([i for i in range(TARGET_LEN) if solution[i] == target_ords[i]])/TARGET_LEN
     return retval
 
