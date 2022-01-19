@@ -83,7 +83,7 @@ class Beagle:
                 logging.debug(f"new data: {[d['population'] for d in data]}")
             data = self.score_round(data)
             high_score = self.get_high_score(data)
-            logging.debug(f"best: {i}: {high_score['population']} {high_score['score']}") 
+            logging.info(f"best: {i}: {high_score['population']} {high_score['score']}") 
             if high_score['score'] == 1.0: 
                 logging.info("ideal value found")
                 return True, i, high_score 
