@@ -5,7 +5,7 @@ from numpy import random as npr
 import pygad
 
 POPSIZE = 5000
-TARGET = "whatchu talking bout willis?"
+TARGET = "methinks it is like a weasel"
 TARGET_LEN = len(TARGET)
 STRING_DOMAIN = list(string.ascii_lowercase + string.punctuation + " ")
 STRING_DOMAIN_LEN = len(STRING_DOMAIN)
