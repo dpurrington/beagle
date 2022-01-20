@@ -28,10 +28,11 @@ def main(population_size = POPSIZE, generations = 300):
                            num_genes = TARGET_LEN,
                            num_parents_mating = 2,
                            fitness_func = fitness_calc,
-                           gene_type=int,
-                           gene_space=[ord(c) for c in STRING_DOMAIN],
-                           stop_criteria=["reach_1"],
-                           crossover_probability=1,
+                           gene_type=int,                               # genes are all integers (char is not an option)
+                           gene_space=[ord(c) for c in STRING_DOMAIN],  # values are all the ord(chars) in the string domain
+                           stop_criteria=["reach_1"],                   # stop when we get to the value of 1 (perfect match)
+                           #strategy tuning
+                           crossover_probability=1,                     # always crossover
                            on_generation=func_generation)
     ga_instance.run()
     sol = ga_instance.best_solution()
