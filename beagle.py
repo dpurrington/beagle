@@ -2,8 +2,7 @@ from numpy import random as npr
 import logging
 import itertools
 
-def get_candidate(population):
-    return { population }
+MUTATION_PROBABILITY=0.001
 
 class Beagle:
     def __init__(self, fitness_function):
@@ -29,7 +28,6 @@ class Beagle:
 
     def reproduce(self, data):
         # pair (randomly -- just taking the pairs as they are because they were created randomly
-
         pairs = list(zip(data[::2], data[1::2]))
 
         # crossover the random pairs, don't reuse the same dictionaries
@@ -44,16 +42,12 @@ class Beagle:
 
         new_data = []
         for p in pairs:
-            #new k every pair
-            k = npr.randint(0, pop_len)
+            #new crossover point every pair
+            crossover_point = npr.randint(0, pop_len)
             #don't reuse the same dictionaries, make new ones
-            #slice at k
-            x_pop = p[0]['population'][:k] + p[1]['population'][k:] 
-            y_pop = p[1]['population'][:k] + p[0]['population'][k:]
-            logging.debug(f"old x: {p[0]['population']}")
-            logging.debug(f"old y: {p[1]['population']}")
-            logging.debug(f"new x: {x_pop}")
-            logging.debug(f"new y: {y_pop}")
+            #do the crossover
+            x_pop = p[0]['population'][:crossover_point] + p[1]['population'][crossover_point:] 
+            y_pop = p[1]['population'][:crossover_point] + p[0]['population'][crossover_point:]
             x = { 'population': x_pop }
             y = { 'population': y_pop }
             new_data.append(x)
@@ -65,7 +59,7 @@ class Beagle:
         for d in data:
             for p in d['population']:
                 # this is O(n^^2), which sucks
-                if npr.random_sample() <= 0.001:
+                if npr.random_sample() <= MUTATION_PROBABILITY: 
                     #mutate 
                     p = npr.randint(0, 101)
         return data 
@@ -84,6 +78,7 @@ class Beagle:
             data = self.score_round(data)
             high_score = self.get_high_score(data)
             logging.info(f"best: {i}: {high_score['population']} {high_score['score']}") 
+
             if high_score['score'] == 1.0: 
                 logging.info("ideal value found")
                 return True, i, high_score 
